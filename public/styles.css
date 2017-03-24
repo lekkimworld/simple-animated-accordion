@@ -1,0 +1,144 @@
+.search_filters {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 300px;
+}
+.search_results {
+    position: absolute;
+    top: 10px;
+    left: 320px;
+}
+h1 {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+h2 {
+    font-size: 1.15em;
+    font-weight: bold;
+}
+div+h2 {
+    margin-top: 0.75em;
+}
+h3 {
+    font-size: 1.0em;
+    font-weight: normal;
+    font-style: italic; 
+}
+div+h3 {
+    margin-top: 0.75em;
+}
+h4 {
+    font-size: 0.90em;
+    font-weight: normal;
+    color:#54698d; 
+}
+div+h4 {
+    margin-top: 0.75em;
+}
+.slds-picklist__options {
+    height: 10em;
+}
+.card_container {
+    display: table;
+}
+.rockstar {
+    background-color: palegoldenrod;
+    box-shadow:inset 0px 0px 0px 2px #ff6600;
+}
+.roundimage {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    border: 2px solid black;
+}
+.expertise_box {
+    max-height: 2em;
+}
+.expertise_box .filler {
+    background-color: #fff;
+    visibility: visible;
+    width: 400px;
+    height: 100px;
+    color: #000;
+    margin-top: -20px;
+    margin-left: -20px;
+    display: block;
+}
+.expertise_box .filler:after {
+    margin-left: 15px;
+    margin-top: 20px;
+    color: #aeaeae;
+    font-size: 0.85em;
+    content: "Hover for options...";
+}
+.expertise_box:hover .filler {
+    visibility: hidden;
+    display: none;
+}
+.expertise_box:hover {
+    max-height: 20em;
+    border: 1px black #ff6600;
+}
+.slds-badge {
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+.card-section-header {
+    font-style: italic; 
+    text-decoration: underline; 
+    margin-top: 5px;
+}
+.mockupcard {
+    width: 470px;
+    min-height: 370px;
+    box-shadow:inset 0px 0px 0px 2px #e0e5ee;
+}
+.mockupcard + .mockupcard {
+    margin-top: 0em;
+}
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000px;
+    float: left;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+}
+/* flip the pane when hovered */
+.flip-container:active .flipper, .flip-container.hover .flipper {
+    transform: rotateY(180deg);
+}
+
+.flip-container, .front, .back {
+	width: 470px;
+	min-height: 370px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+}

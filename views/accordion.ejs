@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<% include ../partials/head %>
+	</head>
+	<body class="slds-p-around--large">
+  
+  <% include ../partials/header %>
+
+
+  <div class="slds-grid">
+    <div class="slds-column slds-size--3-of-12">
+      <%- include('../partials/accordion') %>
+    </div>
+    <div class="slds-column slds-m-left--small slds-size--9-of-12">
+      <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nisi metus, placerat non erat vel, cursus consectetur erat. Morbi nec volutpat augue. Etiam suscipit sollicitudin dolor, sed tempus sapien elementum sit amet. Pellentesque lobortis vulputate orci. Suspendisse eu ullamcorper ante. Donec eget aliquam augue, ut ornare tortor. Curabitur tempor eleifend ex, in varius nisi facilisis sit amet. Vivamus luctus aliquet leo.
+      </p>
+      <p>
+      Mauris eros nibh, mattis non tincidunt id, ullamcorper ut massa. Duis rhoncus diam vitae purus condimentum ultrices. Nam eget dapibus tortor. Donec molestie, purus vitae iaculis scelerisque, dui odio dignissim justo, eu vehicula elit magna cursus quam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla sem nisl, malesuada vel turpis quis, molestie imperdiet turpis. Proin pharetra tortor sit amet metus vestibulum, vitae consectetur dui euismod. Vestibulum nec molestie tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In hac habitasse platea dictumst. Vivamus dictum augue a nulla dapibus, id porta neque malesuada. Nullam hendrerit, neque eget finibus auctor, ante felis sagittis felis, pharetra suscipit lectus ipsum ut erat.
+      </p>
+      <p>
+      Donec dignissim at mauris vel tincidunt. Vestibulum rutrum volutpat dolor quis facilisis. Sed in turpis quis lorem blandit porttitor sed non lectus. Aenean sollicitudin sapien eget accumsan congue. Aliquam metus elit, dignissim a ex sit amet, egestas ultricies ligula. Aenean scelerisque facilisis augue quis rutrum. Nullam bibendum mi ex, non efficitur orci tempus hendrerit. Suspendisse convallis, nisi id tristique sollicitudin, sem sapien feugiat nisi, id condimentum arcu sapien sit amet urna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut tristique porta tristique. Nulla venenatis sit amet urna eget mollis. Duis congue at lectus ut posuere. Quisque turpis ante, blandit et dictum a, scelerisque eget ipsum.
+      </p>
+      <p>
+      Aenean eu eleifend magna, ut rhoncus urna. Pellentesque pretium scelerisque magna et tincidunt. Morbi venenatis cursus urna. Nunc posuere vel libero et finibus. Suspendisse pulvinar congue pretium. Duis hendrerit nunc ut arcu vulputate, eu tempor elit feugiat. Suspendisse malesuada, elit sit amet convallis ullamcorper, est enim viverra diam, blandit commodo mauris enim eu turpis. Aliquam a vulputate turpis, et aliquet enim. Sed fringilla ipsum quam, sit amet ornare eros vulputate eget.
+      </p>
+      <p>
+      Praesent pretium massa ut consequat faucibus. Donec venenatis at dolor vitae ornare. Nulla elementum libero vel libero eleifend vehicula. Curabitur non laoreet velit, sed scelerisque mauris. Etiam bibendum lectus mollis, mattis nulla eget, tempor est. Nullam ac justo ultricies, convallis lacus quis, euismod enim. In hac habitasse platea dictumst. Aliquam erat volutpat. Maecenas tincidunt in tellus vitae congue. Cras pulvinar magna sed urna porttitor vulputate. Donec tellus lacus, tristique sit amet vestibulum vel, elementum et est. Aliquam non elit eu metus venenatis convallis euismod id risus. Nam dapibus leo vel arcu semper mattis. In enim nulla, vehicula at efficitur in, egestas a velit. Cras eget velit quam. Vivamus nisl turpis, hendrerit in tincidunt sit amet, ullamcorper convallis diam.
+      </p>
+      <p>
+      Curabitur tempor purus eget magna dictum vulputate. In ultricies est in gravida imperdiet. Morbi sit amet blandit sapien. Nulla sit amet tincidunt lorem. Donec quis placerat lectus. Pellentesque in ipsum sed libero porta viverra. Ut aliquam volutpat imperdiet. Curabitur facilisis scelerisque sapien sed blandit. Ut dignissim urna a libero pellentesque sollicitudin. In in tortor hendrerit, gravida diam ut, scelerisque dui. Etiam sit amet ex in nisi imperdiet tempor. Nunc nec eleifend justo. In quam risus, faucibus et pharetra eget, accumsan sit amet lacus. In dignissim erat eros, ut sodales turpis pulvinar nec. Sed congue vehicula erat, at vestibulum nisl iaculis in.
+      </p>
+    </div>
+  </div>
+
+
+
+
+  <% include ../partials/jquery %>
+  <script type="text/javascript">
+    $(document).ready(() => {
+      'use strict';
+      const setExpandedHeight = function() {
+        const sections = $('.header').length;
+        const header_height = $('.header')[0].clientHeight;
+        const rect = document.getElementById('accordion').getBoundingClientRect();
+        const viewport_height = window.innerHeight - (4*rect.top);
+        const expanded = $('.expanded')[0].style.height = (viewport_height - (sections * header_height)) + 'px';
+      }
+      setExpandedHeight();
+      
+      $(window).on('resize', (event) => {
+        setExpandedHeight();
+      });
+      $('.header').on('click', (event) => {
+        $('.item').removeClass('expanded').addClass('collapsed');
+        const ev = (event.originalEvent ? event.originalEvent : event);
+        const src = ev.srcElement;
+        $(src.nextElementSibling).removeClass("collapsed").addClass('expanded');
+        setExpandedHeight();
+      });
+    });
+  </script>
+	</body>
+</html>
