@@ -16,9 +16,14 @@
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
 }
-.round-bottom {
+.header:nth-last-of-type(2) {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
+}
+.header.active {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #a9a9a9;
 }
 .expanded {
     display: block;
@@ -46,7 +51,7 @@ Praesent pretium massa ut consequat faucibus. Donec venenatis at dolor vitae orn
 Curabitur tempor purus eget magna dictum vulputate. In ultricies est in gravida imperdiet. Morbi sit amet blandit sapien. Nulla sit amet tincidunt lorem. Donec quis placerat lectus. Pellentesque in ipsum sed libero porta viverra. Ut aliquam volutpat imperdiet. Curabitur facilisis scelerisque sapien sed blandit. Ut dignissim urna a libero pellentesque sollicitudin. In in tortor hendrerit, gravida diam ut, scelerisque dui. Etiam sit amet ex in nisi imperdiet tempor. Nunc nec eleifend justo. In quam risus, faucibus et pharetra eget, accumsan sit amet lacus. In dignissim erat eros, ut sodales turpis pulvinar nec. Sed congue vehicula erat, at vestibulum nisl iaculis in.
         </div>
         <div class="slds-box header">Sector Expertise</div>
-        <div class="slds-box slds-scrollable--y item expanded">
+        <div class="slds-box slds-scrollable--y item collapsed">
             (Sector Expertise)
         </div>
         <div class="slds-box header">Functional Expertise</div>
@@ -61,8 +66,8 @@ Curabitur tempor purus eget magna dictum vulputate. In ultricies est in gravida 
         <div class="slds-box slds-scrollable--y item collapsed">
             (Foo)
         </div>
-        <div class="slds-box header round-bottom">Bar</div>
-        <div class="slds-box slds-scrollable--y item collapsed">
+        <div class="slds-box header active">Bar</div>
+        <div class="slds-box slds-scrollable--y item expanded">
             (Bar)
         </div>
     </div>

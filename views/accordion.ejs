@@ -108,23 +108,24 @@
         const header_height = $('.header')[0].clientHeight;
         const rect = document.getElementById('accordion').getBoundingClientRect();
         const viewport_height = window.innerHeight - (4*rect.top);
-        const expanded = $('.expanded')[0].style.height = (viewport_height - (sections * header_height)) + 'px';
+        if ($('.expanded').length) {
+          $('.expanded')[0].style.height = (viewport_height - (sections * header_height)) + 'px';
+        }
       }
       setExpandedHeight();
       
       $(window).on('resize', (event) => {
         setExpandedHeight();
       });
+
       $('.header').on('click', (event) => {
-        $('.item').removeClass('expanded').addClass('collapsed');
         const ev = (event.originalEvent ? event.originalEvent : event);
         const src = ev.srcElement;
+        $('.header').removeClass('active');
+        $(src).addClass("active");
+        $('.item').removeClass('expanded').addClass('collapsed');
         $(src.nextElementSibling).removeClass("collapsed").addClass('expanded');
-        if (src.className.indexOf('round-bottom') != -1) {
-          $(src).removeClass("round-bottom"); 
-        } else {
-          $('.header').last().addClass('round-bottom');
-        }
+        
         setExpandedHeight();
       });
     });
