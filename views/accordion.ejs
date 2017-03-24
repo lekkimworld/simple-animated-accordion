@@ -120,6 +120,11 @@
         const ev = (event.originalEvent ? event.originalEvent : event);
         const src = ev.srcElement;
         $(src.nextElementSibling).removeClass("collapsed").addClass('expanded');
+        if (src.className.indexOf('round-bottom') != -1) {
+          $(src).removeClass("round-bottom"); 
+        } else {
+          $('.header').last().addClass('round-bottom');
+        }
         setExpandedHeight();
       });
     });

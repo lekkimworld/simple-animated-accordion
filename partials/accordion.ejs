@@ -10,10 +10,20 @@
     background-color: #efefef;
     font-weight: bold;
     padding: 0.5rem;
+    border-radius: 0;
+}
+.header:first-of-type {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.round-bottom {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 .expanded {
     display: block;
     visibility: visible;
+    border-radius: 0;
 }
 .collapsed {
     display: none;
@@ -51,7 +61,7 @@ Curabitur tempor purus eget magna dictum vulputate. In ultricies est in gravida 
         <div class="slds-box slds-scrollable--y item collapsed">
             (Foo)
         </div>
-        <div class="slds-box header">Bar</div>
+        <div class="slds-box header round-bottom">Bar</div>
         <div class="slds-box slds-scrollable--y item collapsed">
             (Bar)
         </div>
