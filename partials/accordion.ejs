@@ -26,56 +26,59 @@
     border-bottom-left-radius: 0;
     font-style: italic;
 }
-.expanded {
+.visible {
     display: block;
     visibility: visible;
     border-radius: 0;
+    padding: 5px;
+    height: 0px;
 }
-.collapsed {
+.hidden {
     display: none;
     visibility: hidden;
+    padding: 0;
 }
 </style>
-<div id="accordion" class="accordion">
+<div class="accordion">
     <div class="slds-grid slds-grid--vertical">
         <div class="slds-box header">Suitable Positions</div>
-        <div class="slds-box slds-scrollable--y item collapsed">
+        <div class="slds-box slds-scrollable--y item hidden">
             <div class="item-body">
                 (Suitable Positions)
             </div>
         </div>
         <div class="slds-box header">Engagement Level</div>
-        <div class="slds-box slds-scrollable--y item collapsed">
+        <div class="slds-box slds-scrollable--y item hidden">
             <div class="item-body">
                 (Engagement Level)
             </div>
         </div>
         <div class="slds-box header">Sector Expertise</div>
-        <div class="slds-box slds-scrollable--y item collapsed">
+        <div class="slds-box slds-scrollable--y item hidden">
             <div class="item-body">
             (Sector Expertise)
             </div>
         </div>
         <div class="slds-box header">Functional Expertise</div>
-        <div class="slds-box slds-scrollable--y item collapsed">
+        <div class="slds-box slds-scrollable--y item hidden">
             <div class="item-body">
             (Functional Expertise)
             </div>
         </div>
         <div class="slds-box header">Geographical Expertise</div>
-        <div class="slds-box slds-scrollable--y item collapsed">
+        <div class="slds-box slds-scrollable--y item hidden">
             <div class="item-body">
             (Geographical Expertise)
             </div>
         </div>
         <div class="slds-box header">Foo</div>
-        <div class="slds-box slds-scrollable--y item collapsed">
+        <div class="slds-box slds-scrollable--y item hidden">
             <div class="item-body">
             (Foo)
             </div>
         </div>
         <div class="slds-box header active">Bar</div>
-        <div class="slds-box slds-scrollable--y item expanded">
+        <div class="slds-box slds-scrollable--y item visible">
             <div class="item-body">
             (Bar)
             </div>

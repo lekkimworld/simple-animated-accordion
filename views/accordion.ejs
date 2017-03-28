@@ -102,34 +102,101 @@
   <% include ../partials/jquery %>
   <script type="text/javascript">
     $(document).ready(() => {
+
       'use strict';
-      const setExpandedHeight = function() {
-        const sections = $('.header').length;
-        const header_height = $('.header')[0].clientHeight;
-        const rect = document.getElementById('accordion').getBoundingClientRect();
+      const calcExpandedHeight = () => {
+        const sections = document.querySelectorAll('.header').length;
+        const header_height = document.querySelector('.header').clientHeight;
+        const rect = document.querySelector('.accordion').getBoundingClientRect();
         const viewport_height = window.innerHeight - (4*rect.top);
-        if ($('.expanded').length) {
-          let h = (viewport_height - (sections * header_height));
-          $('.expanded')[0].style.height = h + 'px';
+        const height = (viewport_height - (sections * header_height));
+        return height;
+      };
+
+      const animate = function(args) {
+        const duration = args.duration || 200;
+        const delay = args.delay || 20;
+        const callback = args.callback || (() => {});
+        const before = args.before;
+        const done = args.done;
+        const start = Date.now();
+        let callCount = 0;
+        const animator = () => {
+          // calc percentage
+          const percentage = Math.min(1, (Date.now() - start) / duration);
+          if (callCount === 0 && before) before();
+          
+          // call callback
+          callback(percentage);
+
+          // go again if applicable
+          if (percentage < 1) {
+            window.setTimeout(animator, delay);
+          } else if (done) {
+            done();
+          }
+
+          // increment call count
+          callCount++;
+        };
+
+        window.setTimeout(animator, delay);
+      }
+
+      const setExpandedHeight = function() {
+        const h = calcExpandedHeight();
+        if ($('.visible').length) {
+          $('.visible')[0].style.height = h + 'px';
         }
       }
+
+      document.querySelectorAll('.header').forEach((elem) => {
+        elem.addEventListener('click', (event) => {
+          // get clicked element
+          const elemClickedHeader = event.srcElement;
+          const elemCollapsedSection = elemClickedHeader.nextElementSibling;
+
+          // get currently expanded element
+          const elemCurrentlyActiveHeader = document.querySelector('.active');
+          const elemCurrentlyExpandedSection = elemCurrentlyActiveHeader.nextElementSibling;
+          if (elemCurrentlyActiveHeader === elemClickedHeader) return;
+
+          // remove active class from all headers and add to clicked
+          document.querySelectorAll('.header').forEach((e) => e.classList.remove('active'));
+          elemClickedHeader.classList.add('active');
+
+          // hide all content in sections
+          document.querySelectorAll('.item-body').forEach((e) => e.classList.add('hidden'));
+
+          // get target height
+          const targetHeight = elemCurrentlyExpandedSection.getBoundingClientRect().height;
+          animate({
+            callback: (percentage) => {
+              elemCurrentlyExpandedSection.style.height = ((1-percentage)*targetHeight) + 'px';
+              elemCollapsedSection.style.height = (percentage*targetHeight) + 'px';
+            }, 
+            before: () => {
+              elemCollapsedSection.classList.add('visible');
+              elemCollapsedSection.classList.remove('hidden');
+            },
+            done: () => {
+              elemCurrentlyExpandedSection.classList.add('hidden');
+              elemCurrentlyExpandedSection.classList.remove('visible');
+
+              // reshow all content in sections
+              document.querySelectorAll('.item-body').forEach((e) => e.classList.remove('hidden'));
+            }
+          });
+
+        });
+      });
+
       setExpandedHeight();
       
-      $(window).on('resize', (event) => {
+      window.addEventListener('resize', (event) => {
         setExpandedHeight();
       });
 
-      $('.header').on('click', (event) => {
-        const ev = (event.originalEvent ? event.originalEvent : event);
-        const src = ev.srcElement;
-
-        $('.header').removeClass('active');
-        $(src).addClass("active");
-        $('.item').removeClass('expanded').addClass('collapsed');
-        $(src.nextElementSibling).removeClass("collapsed").addClass('expanded');
-        
-        setExpandedHeight();
-      });
     });
   </script>
 	</body>
