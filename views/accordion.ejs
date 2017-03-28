@@ -109,7 +109,8 @@
         const rect = document.getElementById('accordion').getBoundingClientRect();
         const viewport_height = window.innerHeight - (4*rect.top);
         if ($('.expanded').length) {
-          $('.expanded')[0].style.height = (viewport_height - (sections * header_height)) + 'px';
+          let h = (viewport_height - (sections * header_height));
+          $('.expanded')[0].style.height = h + 'px';
         }
       }
       setExpandedHeight();
@@ -121,6 +122,7 @@
       $('.header').on('click', (event) => {
         const ev = (event.originalEvent ? event.originalEvent : event);
         const src = ev.srcElement;
+
         $('.header').removeClass('active');
         $(src).addClass("active");
         $('.item').removeClass('expanded').addClass('collapsed');
