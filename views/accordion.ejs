@@ -100,8 +100,8 @@
 
     'use strict';
     const calcExpandedHeight = () => {
-      const sections = document.querySelectorAll('.header').length;
-      const header_height = document.querySelector('.header').clientHeight;
+      const sections = document.querySelectorAll('.accordion-header').length;
+      const header_height = document.querySelector('.accordion-header').clientHeight;
       const rect = document.querySelector('.accordion').getBoundingClientRect();
       console.log(`${sections} ${header_height} ${rect}`);
       const viewport_height = window.innerHeight - (4*rect.top);
@@ -144,29 +144,29 @@
 
     const setExpandedHeight = function() {
       const h = calcExpandedHeight();
-      if (document.querySelectorAll('.visible').length) {
-        document.querySelector('.visible').style.height = h + 'px';
+      if (document.querySelectorAll('.accordion-visible').length) {
+        document.querySelector('.accordion-visible').style.height = h + 'px';
       }
     }
 
-    document.querySelectorAll('.header').forEach((elem) => {
+    document.querySelectorAll('.accordion-header').forEach((elem) => {
       elem.addEventListener('click', (event) => {
         // get clicked element
         const elemClickedHeader = event.srcElement;
         const elemCollapsedSection = elemClickedHeader.nextElementSibling;
 
         // get currently expanded element
-        const elemCurrentlyActiveHeader = document.querySelector('.active');
+        const elemCurrentlyActiveHeader = document.querySelector('.accordion-active');
         if (elemCurrentlyActiveHeader === elemClickedHeader) return;
         const elemCurrentlyExpandedSection = elemCurrentlyActiveHeader ? elemCurrentlyActiveHeader.nextElementSibling : null;
         
 
         // remove active class from all headers and add to clicked
-        document.querySelectorAll('.header').forEach((e) => e.classList.remove('active'));
-        elemClickedHeader.classList.add('active');
+        document.querySelectorAll('.accordion-header').forEach((e) => e.classList.remove('accordion-active'));
+        elemClickedHeader.classList.add('accordion-active');
 
         // hide all content in sections
-        document.querySelectorAll('.item-body').forEach((e) => e.classList.add('hidden'));
+        document.querySelectorAll('.item-body').forEach((e) => e.classList.add('accordion-hidden'));
 
         // get target height
         const targetHeight = elemCurrentlyExpandedSection ? elemCurrentlyExpandedSection.getBoundingClientRect().height : calcExpandedHeight();
@@ -176,17 +176,17 @@
             elemCollapsedSection.style.height = (percentage*targetHeight) + 'px';
           }, 
           before: () => {
-            elemCollapsedSection.classList.add('visible');
-            elemCollapsedSection.classList.remove('hidden');
+            elemCollapsedSection.classList.add('accordion-visible');
+            elemCollapsedSection.classList.remove('accordion-hidden');
           },
           done: () => {
             if (elemCurrentlyExpandedSection) {
-              elemCurrentlyExpandedSection.classList.add('hidden');
-              elemCurrentlyExpandedSection.classList.remove('visible');
+              elemCurrentlyExpandedSection.classList.add('accordion-hidden');
+              elemCurrentlyExpandedSection.classList.remove('accordion-visible');
             }
 
             // reshow all content in sections
-            document.querySelectorAll('.item-body').forEach((e) => e.classList.remove('hidden'));
+            document.querySelectorAll('.item-body').forEach((e) => e.classList.remove('accordion-hidden'));
           }
         });
 
